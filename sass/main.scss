@@ -1,10 +1,14 @@
-$color-primary: #769fcd;
-$color-secondary: #b9d7ea;
+$color-primary: #bad7df;
+$color-secondary: #f6f6f6;
+$color-income: #99ddcc;
+$color-expense: #ffe2e2;
 $color-secondary-lighten-1: #d6e6f2;
 $color-secondary-lighten-2: #f7fbfc;
 
 $color-white: #fff;
 $color-black: #000;
+$color-grey: #cdd5e0;
+$color-green: #4bbb8b;
 
 $font-color: #303a52;
 
@@ -39,7 +43,7 @@ body {
     border-radius: 5px;
 
     display: grid;
-    grid-template-rows: repeat(2, min-content);
+    grid-template-rows: repeat(3, min-content);
 }
 
 .main-header {
@@ -118,92 +122,293 @@ body {
 }
 
 .section-form {
-
     background-color: $color-secondary;
-    
-    &__form {
-        display: grid;
-        grid-template-rows: repeat(4, min-content);
-        grid-row-gap: 1rem;
-        justify-content: center;
-        justify-items: center;
+}
 
-        padding: 1rem 0 1.5rem 0;
+.form {
+    display: grid;
+    grid-template-rows: repeat(4, min-content);
+    justify-content: center;
+    justify-items: center;
 
-        & > *:not(:last-child) {
+    &__field {
+        padding: 1.5rem 0;
+        position: relative;
+
+        & > select, input {
+            font-family: Lato, sans-serif;
+            font-size: 1.4rem;
+            color: $font-color;
+
             width: 28rem;
+            padding: 1.2rem 0 1.2rem 1.5rem;
 
             -webkit-appearance: none;
             -moz-appearance: none;
             appearance: none;
 
-            border: 1px solid rgba($font-color, .2);
-            background-color: $color-secondary;
-            border-radius: 5px;
-            padding: 1rem 0;
+            border: none;
+            border-radius: 0;
+            background-color: transparent;
+            border-bottom: 1px solid rgba($font-color, .3);
+            transition: border-bottom .2s;
+        }
 
-            font-family: Lato, sans-serif;
-            font-size: 1.6rem;
-            color: $font-color;
+        &:last-child {
+            justify-self: start;
+        }
+    }
 
-            transition: border .2s;
+    &__type-selection {
 
-            &:focus {
-                outline: none;
-                border: 1px solid rgba($font-color, .6);
-            }
+        &:focus, &:active {
+            outline: none;
+            border-bottom: 1px solid rgba($font-color, .7);
+        }
+
+    }
+
+    &__text-content {
+
+        &-label {
+            font-size: 1.3rem;
+            position: absolute;
+            top: 2.4rem;
+            left: 1.5rem;
+
+            transition: top .2s, left .2s, font-size .2s;
+        }
+
+        &:focus ~ &-label,
+        &:valid ~ &-label {
+            top: 5px;
+            left: 2px;
+            font-size: 1rem;
+        }
+
+        &:focus {
+            outline: none;
+            border-bottom: 1px solid rgba($font-color, .7);
+        }
+    }
+
+    &__amount {
+
+        &-label {
+            font-size: 1.3rem;
+            position: absolute;
+            top: 2.4rem;
+            left: 1.5rem;
+
+            transition: top .2s, left .2s, font-size .2s;
+        }
+
+        &:focus ~ &-label,
+        &:valid ~ &-label {
+            top: 5px;
+            left: 2px;
+            font-size: 1rem;
+        }
+
+        &:focus {
+            outline: none;
+            border-bottom: 1px solid rgba($font-color, .7);
+        }
+    }
+
+    &__submit-button {
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+        padding: 1rem 3rem;
+
+        background-color: $color-primary;
+        color: $color-white;
+        transition: background-color .2s, color .2s;
+
+        text-transform: uppercase;
+
+        &:hover, &:focus, &:active {
+            background-color: $color-white;
+            color: $color-primary;
+            outline: none;
+        }
+    }
+}
+
+.section-content {
+    border-top: 1px solid rgba($font-color, .4);
+
+    &__incomes, &__expenses {
+        overflow: hidden;
+    }
+
+    &__expenses {
+        border-top: 1px solid rgba($font-color, .4);
+    }
+}
+
+.incomes {
+
+    &__checkbox {
+        display: none;
+
+        &:checked ~ .incomes__list-wrapper {
+            max-height: 50rem;
+            overflow: auto;
+        }
+
+        &:checked ~ .incomes__label::after {
+            transform: rotate(90deg);
+        }
+    }
+
+    &__label {
+        display: flex;
+        align-items: center;
+
+        position: relative;
+
+        padding: 1.5rem 3rem 1.5rem 2rem;
+        background-color: $color-secondary;
+        box-shadow: 0 1px 5px rgba($color-black, .2);
+
+        font-size: 2rem;
+
+        &::after {
+            content: '';
+            background-image: url(../images/arrow-icon.svg);
+            width: 3rem;
+            height: 3rem;
+            margin-left: auto;
+            transform: rotate(0deg);
+            transition: transform .4s cubic-bezier(0.645, 0.045, 0.355, 1); 
+        }
+    }
+
+    &__list-wrapper {
+        background-color: #f7f7f7;
+        max-height: 0;
+        transition: max-height .4s cubic-bezier(0.645, 0.045, 0.355, 1);
+    }
+
+    &__list {
+        list-style: none;
+        padding: 2rem;
+    }
+
+    &__list-item {
+        background-color: $color-income;
+        border-radius: 5px;
+        color: $color-white;
+        padding: 1.5rem 3rem 1.5rem 2rem;
+
+        display: flex;
+        align-items: center;
+
+        &:not(:last-child) {
+            margin-bottom: 1rem;
+        }
+
+        &-type {
+            font-size: 2.4rem;
+
+            margin-right: 3rem;
+        }
+
+        &-title {
+            font-size: 1.8rem;
+        }
+
+        &-delete-icon {
+            width: 2.5rem;
+            height: 2.5rem;
+            fill: $font-color;
+            margin-left: auto;
+            opacity: .7;
         }
     }
 
 }
 
-.form {
+.expenses {
 
-    &__type-selection {
-        text-align-last: center;
-    }
+    &__checkbox {
+        display: none;
 
-    &__text-content, &__value {
-        text-align: center;
-
-        &::placeholder {
-            color: rgba($font-color, .6);
-            transition: color .2s;
+        &:checked ~ .expenses__list-wrapper {
+            max-height: 50rem;
+            overflow: auto;
         }
 
-        &:focus::placeholder {
-            color: transparent;
+        &:checked ~ .expenses__label::after {
+            transform: rotate(90deg);
         }
     }
 
-    &__submit-button {
-        width: 14rem;
-        padding: 1rem 0;
+    &__label {
+        display: flex;
+        align-items: center;
 
-        border: none;
-        border-radius: 2rem;
-        box-shadow: 0 3px 5px rgba($color-black, .2);
-        cursor: pointer;
-        transition: box-shadow .2s, transform .2s;
+        position: relative;
 
-        font-family: Lato, sans-serif;
-        font-size: 1.4rem;
-        color: $font-color;
+        padding: 1.5rem 3rem 1.5rem 2rem;
+        background-color: $color-secondary;
+        box-shadow: 0 1px 5px rgba($color-black, .2);
 
-        background-color: rgba($color-primary, .4);
+        font-size: 2rem;
 
-        &:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 3px 10px rgba($color-black, .23);
+        &::after {
+            content: '';
+            background-image: url(../images/arrow-icon.svg);
+            width: 3rem;
+            height: 3rem;
+            margin-left: auto;
+            transform: rotate(0deg);
+            transition: transform .4s cubic-bezier(0.645, 0.045, 0.355, 1); 
+        }
+    }
+
+    &__list-wrapper {
+        background-color: #f7f7f7;
+        max-height: 0;
+        transition: max-height .4s cubic-bezier(0.645, 0.045, 0.355, 1);
+    }
+
+    &__list {
+        list-style: none;
+        padding: 2rem;
+    }
+
+    &__list-item {
+        background-color: $color-expense;
+        border-radius: 5px;
+        color: $color-white;
+        padding: 1.5rem 3rem 1.5rem 2rem;
+
+        display: flex;
+        align-items: center;
+
+        &:not(:last-child) {
+            margin-bottom: 1rem;
         }
 
-        &:focus {
-            outline: none;
+        &-type {
+            font-size: 2.4rem;
+
+            margin-right: 3rem;
         }
 
-        &:active {
-            outline: none;
-            box-shadow: 0 3px 5px rgba($color-black, .2);
+        &-title {
+            font-size: 1.8rem;
+        }
+
+        &-delete-icon {
+            width: 2.5rem;
+            height: 2.5rem;
+            fill: $font-color;
+            margin-left: auto;
+            opacity: .7;
         }
     }
 

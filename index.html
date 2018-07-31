@@ -23,19 +23,86 @@
             </header>
 
             <section class = 'section-form'>
-                <form class = 'section-form__form'>
-                    <select class = 'form__type-selection'>
-                        <option>
-                            Income
-                        </option>
-                        <option>
-                            Expense
-                        </option>
-                    </select>
-                    <input type = 'text' class = 'form__text-content' placeholder = 'Add some description..'>
-                    <input type = 'number' class = 'form__value' placeholder = '100'>
-                    <button class = 'form__submit-button'>Submit</button>
+                <form class = 'form'>
+                    <div class = 'form__field'>
+                        <select class = 'form__type-selection'>
+                            <option>Income</option>
+                            <option>Expense</option>
+                        </select>
+                    </div>
+                    <div class = 'form__field'>
+                        <input type = 'text' class = 'form__text-content' id = 'text-content' required>
+                        <label class = 'form__text-content-label' for = 'text-content'>Description</label>
+                    </div>
+                    <div class = 'form__field'>
+                        <input type = 'number' class = 'form__amount' id = 'amount' required>
+                        <label class = 'form__amount-label' for = 'amount'>Amount</label>
+                    </div>
+                    <div class = 'form__field'>
+                        <button class = 'form__submit-button'>Submit</button>
+                    </div>
                 </form>
+            </section>
+
+            <section class = 'section-content'>
+                <div class = 'section-content__incomes'>
+                    <input type = 'checkbox' id = 'checkbox-incomes' class = 'incomes__checkbox'>
+                    <label for = 'checkbox-incomes' class = 'incomes__label'>Incomes</label>
+                    <div class = 'incomes__list-wrapper'>
+                        <ul class = 'incomes__list'>
+                            <li class = 'incomes__list-item'>
+                                <span class = 'incomes__list-item-type'>+</span>
+                                <span class = 'incomes__list-item-title'>Sold car</span>
+                                <svg class = 'incomes__list-item-delete-icon'>
+                                    <use href = 'images/delete-icon.svg#icon-delete'></use>
+                                </svg>
+                            </li>
+                            <li class = 'incomes__list-item'>
+                                <span class = 'incomes__list-item-type'>+</span>
+                                <span class = 'incomes__list-item-title'>Sold car</span>
+                                <svg class = 'incomes__list-item-delete-icon'>
+                                    <use href = 'images/delete-icon.svg#icon-delete'></use>
+                                </svg>
+                            </li>
+                            <li class = 'incomes__list-item'>
+                                <span class = 'incomes__list-item-type'>+</span>
+                                <span class = 'incomes__list-item-title'>Sold car</span>
+                                <svg class = 'incomes__list-item-delete-icon'>
+                                    <use href = 'images/delete-icon.svg#icon-delete'></use>
+                                </svg>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class = 'section-content__expenses'>
+                    <input type = 'checkbox' id = 'checkbox-expenses' class = 'expenses__checkbox'>
+                    <label for = 'checkbox-expenses' class = 'expenses__label'>Expenses</label>
+                    <div class = 'expenses__list-wrapper'>
+                        <ul class = 'expenses__list'>
+                            <li class = 'expenses__list-item'>
+                                <span class = 'expenses__list-item-type'>-</span>
+                                <span class = 'expenses__list-item-title'>Bought an iPhone</span>
+                                <svg class = 'expenses__list-item-delete-icon'>
+                                    <use href = 'images/delete-icon.svg#icon-delete'></use>
+                                </svg>
+                            </li>
+                            <li class = 'expenses__list-item'>
+                                <span class = 'expenses__list-item-type'>-</span>
+                                <span class = 'expenses__list-item-title'>Taxes</span>
+                                <svg class = 'expenses__list-item-delete-icon'>
+                                    <use href = 'images/delete-icon.svg#icon-delete'></use>
+                                </svg>
+                            </li>
+                            <li class = 'expenses__list-item'>
+                                <span class = 'expenses__list-item-type'>-</span>
+                                <span class = 'expenses__list-item-title'>Food</span>
+                                <svg class = 'expenses__list-item-delete-icon'>
+                                    <use href = 'images/delete-icon.svg#icon-delete'></use>
+                                </svg>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </section>
         </div>
     </body>

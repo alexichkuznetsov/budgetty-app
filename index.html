@@ -1,0 +1,42 @@
+<!doctype html>
+
+<html>
+    <head>
+        <meta charset = 'utf-8'>
+        <meta name = 'viewport' content = 'width = device-width, initial-scale = 1.0'>
+
+        <link rel = 'stylesheet' href = 'https://fonts.googleapis.com/css?family=Lato:300,400'>
+        <link rel = 'stylesheet' href = 'css/style.css'>
+
+        <title>Budget App</title>
+    </head>
+
+    <body>
+        <div class = 'app'>
+            <header class = 'main-header'>
+                <h1 class = 'main-header__logo'>
+                    Budgetty
+                </h1>
+                <div class = 'main-header__number'>
+                    10
+                </div>
+            </header>
+
+            <section class = 'section-form'>
+                <form class = 'section-form__form'>
+                    <select class = 'form__type-selection'>
+                        <option>
+                            Income
+                        </option>
+                        <option>
+                            Expense
+                        </option>
+                    </select>
+                    <input type = 'text' class = 'form__text-content' placeholder = 'Add some description..'>
+                    <input type = 'number' class = 'form__value' placeholder = '100'>
+                    <button class = 'form__submit-button'>Submit</button>
+                </form>
+            </section>
+        </div>
+    </body>
+</html>

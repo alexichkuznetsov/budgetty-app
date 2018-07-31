@@ -1,0 +1,19 @@
+{
+  "name": "budget-app",
+  "version": "1.0.0",
+  "description": "Simple budget app build with pure html, css (sass) and javascript",
+  "main": "index.js",
+  "scripts": {
+    "watch:sass": "node-sass sass/main.scss css/style.css --watch",
+    "compile:sass": "node-sass sass/main.scss css/style.css",
+    "dev-server": "live-server --browser='Google Chrome'",
+    "start": "npm-run-all --parallel watch:sass dev-server"
+  },
+  "author": "Aleksey Kuznetsov",
+  "license": "ISC",
+  "devDependencies": {
+    "live-server": "^1.2.0",
+    "node-sass": "^4.9.2",
+    "npm-run-all": "^4.1.3"
+  }
+}

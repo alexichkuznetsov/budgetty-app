@@ -19,6 +19,9 @@ body {
   color: #2c3e50;
   background-image: linear-gradient(to right, #11998e, #38ef7d);
   padding: 3rem; }
+  @media only screen and (max-width: 300px) {
+    body {
+      padding: 0; } }
 
 .app {
   max-width: 100rem;
@@ -28,6 +31,9 @@ body {
   overflow: hidden;
   display: grid;
   grid-template-rows: repeat(4, min-content); }
+  @media only screen and (max-width: 300px) {
+    .app {
+      border-radius: 0; } }
 
 .main-header {
   display: grid;
@@ -95,9 +101,6 @@ body {
       background-color: transparent;
       border-bottom: 1px solid rgba(44, 62, 80, 0.8);
       transition: border-bottom .2s; }
-      @media only screen and (max-width: 400px) {
-        .form__field > select, .form__field input {
-          width: 34rem; } }
     .form__field:last-child {
       justify-self: start; }
   .form__type-selection:focus, .form__type-selection:active {

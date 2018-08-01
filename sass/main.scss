@@ -38,6 +38,11 @@ body {
 
     // Just to see if it looks better with padding
     padding: 3rem;
+    
+    // If there any phones/tablets that has a width of 300px or less
+    @media only screen and (max-width: 300px) {
+        padding: 0; // But it looks uglier
+    }
 }
 
 .app {
@@ -46,6 +51,11 @@ body {
 
     box-shadow: 0 0 10px rgba($color-black, 0.4);
     border-radius: 5px;
+
+    @media only screen and (max-width: 300px) {
+        border-radius: 0;
+    }
+
     overflow: hidden;
 
     display: grid;
@@ -131,10 +141,6 @@ body {
             color: $font-color;
 
             width: 28rem;
-
-            @media only screen and (max-width: 400px) {
-                width: 34rem;
-            }
             
             padding: 1.2rem 0 1.2rem 1.5rem;
 

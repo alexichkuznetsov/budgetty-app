@@ -1,16 +1,15 @@
-$color-primary: #bad7df;
-$color-secondary: #f6f6f6;
-$color-income: #99ddcc;
-$color-expense: #ffe2e2;
-$color-secondary-lighten-1: #d6e6f2;
-$color-secondary-lighten-2: #f7fbfc;
+$color-primary: #11998e;
+$color-secondary: #38ef7d;
+
+$color-income: #2ecc71;
+$color-expense: #e74c3c;
+$color-percentages: #4bcffa;
 
 $color-white: #fff;
 $color-black: #000;
-$color-grey: #cdd5e0;
-$color-green: #4bbb8b;
+$color-grey: #ecf0f1;
 
-$font-color: #303a52;
+$font-color: #2c3e50;
 
 *,
 *::before,
@@ -23,6 +22,10 @@ $font-color: #303a52;
 html {
     font-size: 62.5%; // 1rem = 10px
     box-sizing: border-box;
+
+    @media only screen and (max-width: 400px) {
+        font-size: 50%;
+    }
 }
 
 body {
@@ -30,6 +33,8 @@ body {
     font-weight: 400;
     line-height: 1.6;
     color: $font-color;
+
+    background-image: linear-gradient(to right, $color-primary, $color-secondary);
 
     // Just to see if it looks better with padding
     padding: 3rem;
@@ -39,20 +44,20 @@ body {
     max-width: 100rem;
     margin: 0 auto;
 
-    box-shadow: 0 0 5px rgba($color-black, 0.2);
+    box-shadow: 0 0 10px rgba($color-black, 0.4);
     border-radius: 5px;
+    overflow: hidden;
 
     display: grid;
-    grid-template-rows: repeat(3, min-content);
+    grid-template-rows: repeat(4, min-content);
 }
 
 .main-header {
     display: grid;
     grid-template-columns: [start] minmax(0, 3rem) [logo-start] max-content [logo-end gap-start] 1fr [gap-end number-start] max-content [number-end] minmax(0, 3rem) [end];
 
-    background-color: $color-primary;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
+    background-color: $color-grey;
+    border-bottom: 1px solid rgba($font-color, .3);
     padding: 1rem 0;
 
     @media only screen and (max-width: 400px) {
@@ -66,32 +71,13 @@ body {
         transition: color .2s;
         cursor: default;
 
-        display: flex;
-        align-items: center;
-
-        &::before {
-            content: "";
-            background-image: url(../images/cart-icon.svg);
-            width: 1.8rem;
-            height: 1.8rem;
-            margin-right: 6px;
-            opacity: 0.6;
-            transition: opacity .2s;
+        &:hover {
+            color: rgba($font-color, .8);
         }
 
         @media only screen and (max-width: 400px) {
             grid-row: 1 / 2;
             grid-column: 2 / 3;
-        }
-    }
-
-    &__logo:hover {
-        & {
-            color: rgba($font-color, 0.7);
-
-            &::before {
-                opacity: 0.5;
-            }
         }
     }
 
@@ -101,10 +87,17 @@ body {
 
         padding: 4px 14px;
         border-radius: 3px;
-        background-color: rgba($color-white, 0.3);
+        background-color: $color-primary;
+        color: $color-white;
+
+        &:hover {
+            background-color: $color-white;
+            color: $color-primary;
+        }
         
         font-size: 1.4rem;
-        transition: background-color 0.2s;
+        transition: background-color .2s,
+                    color .2s;
         cursor: default;
 
         @media only screen and (max-width: 400px) {
@@ -115,14 +108,11 @@ body {
             margin: 1rem 0;
         }
     }
-
-    &__number:hover {
-        background-color: rgba($color-white, 0.5);
-    }
 }
 
 .section-form {
-    background-color: $color-secondary;
+    background-color: $color-grey;
+    border-bottom: 1px solid rgba($font-color, .3);
 }
 
 .form {
@@ -137,10 +127,15 @@ body {
 
         & > select, input {
             font-family: Lato, sans-serif;
-            font-size: 1.4rem;
+            font-size: 1.6rem;
             color: $font-color;
 
             width: 28rem;
+
+            @media only screen and (max-width: 400px) {
+                width: 34rem;
+            }
+            
             padding: 1.2rem 0 1.2rem 1.5rem;
 
             -webkit-appearance: none;
@@ -150,7 +145,7 @@ body {
             border: none;
             border-radius: 0;
             background-color: transparent;
-            border-bottom: 1px solid rgba($font-color, .3);
+            border-bottom: 1px solid rgba($font-color, .8);
             transition: border-bottom .2s;
         }
 
@@ -163,7 +158,7 @@ body {
 
         &:focus, &:active {
             outline: none;
-            border-bottom: 1px solid rgba($font-color, .7);
+            border-bottom: 1px solid rgba($color-primary, .8);
         }
 
     }
@@ -171,24 +166,25 @@ body {
     &__text-content {
 
         &-label {
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             position: absolute;
-            top: 2.4rem;
+            top: 2.5rem;
             left: 1.5rem;
 
-            transition: top .2s, left .2s, font-size .2s;
+            transition: top .2s, left .2s, font-size .2s, color .2s;
         }
 
         &:focus ~ &-label,
         &:valid ~ &-label {
-            top: 5px;
+            top: 4px;
             left: 2px;
-            font-size: 1rem;
+            font-size: 1.2rem;
+            color: rgba($color-primary, .9);
         }
 
         &:focus {
             outline: none;
-            border-bottom: 1px solid rgba($font-color, .7);
+            border-bottom: 1px solid rgba($color-primary, .8);
         }
     }
 
@@ -200,7 +196,7 @@ body {
             top: 2.4rem;
             left: 1.5rem;
 
-            transition: top .2s, left .2s, font-size .2s;
+            transition: top .2s, left .2s, font-size .2s, color .2s;
         }
 
         &:focus ~ &-label,
@@ -208,11 +204,12 @@ body {
             top: 5px;
             left: 2px;
             font-size: 1rem;
+            color: rgba($color-primary, .9);
         }
 
         &:focus {
             outline: none;
-            border-bottom: 1px solid rgba($font-color, .7);
+            border-bottom: 1px solid rgba($color-primary, .8);
         }
     }
 
@@ -236,15 +233,89 @@ body {
     }
 }
 
-.section-content {
-    border-top: 1px solid rgba($font-color, .4);
+.section-totals {
+    background-color: $color-grey;
+    border-bottom: 1px solid rgba($font-color, .3);
 
-    &__incomes, &__expenses {
-        overflow: hidden;
+    display: grid;
+    grid-template-rows: repeat(2, min-content);
+    grid-template-columns: repeat(3, max-content);
+    grid-gap: 1rem;
+    justify-content: center;
+
+    padding: 1rem 0;
+}
+
+.totals {
+    &__title {
+        grid-row: 1 / 2;
+        grid-column: 1 / -1;
+
+        color: $color-primary;
+        text-align: center;
+        font-size: 2.6rem;
+    }
+
+    &__incomes, &__expenses, &__percentages {
+        padding: 4px 8px;
+        min-width: 8rem;
+        border-radius: 3px;
+        color: $color-white;
+        cursor: default;
+        transition: color .2s,
+                    background-color .2s;
+
+        display: flex;
+        align-items: center;
+    }
+
+    &__incomes {
+        background-color: $color-income;
+
+        &:hover {
+            background-color: $color-white;
+            color: $color-income;
+        }
     }
 
     &__expenses {
-        border-top: 1px solid rgba($font-color, .4);
+        background-color: $color-expense;
+
+        &:hover {
+            background-color: $color-white;
+            color: $color-expense;
+        }
+    }
+
+    &__percentages {
+        background-color: $color-percentages;
+        font-size: 2rem;
+        justify-content: center;
+
+        &:hover {
+            background-color: $color-white;
+            color: $color-percentages;
+        }
+    }
+
+    &__type {
+        font-size: 2.4rem;
+    }
+
+    &__value {
+        font-size: 2rem;
+        margin: 0 auto;
+    }
+}
+
+.section-content {
+    &__incomes, &__expenses {
+        background-color: $color-grey;
+        overflow: hidden;
+    }
+
+    &__incomes {
+        border-bottom: 1px solid rgba($font-color, .3);
     }
 }
 
@@ -258,6 +329,10 @@ body {
             overflow: auto;
         }
 
+        &:checked ~ .incomes__label {
+            color: rgba($color-primary, .9);
+        }
+
         &:checked ~ .incomes__label::after {
             transform: rotate(90deg);
         }
@@ -269,17 +344,18 @@ body {
 
         position: relative;
 
-        padding: 1.5rem 3rem 1.5rem 2rem;
-        background-color: $color-secondary;
+        padding: 1.5rem 3rem 1.5rem 3rem;
         box-shadow: 0 1px 5px rgba($color-black, .2);
+        transition: color .2s;
 
         font-size: 2rem;
+        cursor: pointer;
 
         &::after {
             content: '';
             background-image: url(../images/arrow-icon.svg);
-            width: 3rem;
-            height: 3rem;
+            width: 2.8rem;
+            height: 2.8rem;
             margin-left: auto;
             transform: rotate(0deg);
             transition: transform .4s cubic-bezier(0.645, 0.045, 0.355, 1); 
@@ -294,14 +370,15 @@ body {
 
     &__list {
         list-style: none;
-        padding: 2rem;
+        padding: 2rem 3rem;
     }
 
     &__list-item {
         background-color: $color-income;
         border-radius: 5px;
         color: $color-white;
-        padding: 1.5rem 3rem 1.5rem 2rem;
+        padding: 1.5rem 2rem;
+        transition: background-color .2s;
 
         display: flex;
         align-items: center;
@@ -310,10 +387,20 @@ body {
             margin-bottom: 1rem;
         }
 
-        &-type {
-            font-size: 2.4rem;
+        &-value {
+            width: 10rem;
 
-            margin-right: 3rem;
+            display: flex;
+            align-items: center;
+
+            .value-type {
+                font-size: 2.4rem;
+            }
+
+            .value-amount {
+                font-size: 2rem;
+                margin-left: 1rem;
+            }
         }
 
         &-title {
@@ -321,11 +408,21 @@ body {
         }
 
         &-delete-icon {
-            width: 2.5rem;
-            height: 2.5rem;
+            width: 2.7rem;
+            height: 2.7rem;
             fill: $font-color;
             margin-left: auto;
-            opacity: .7;
+            opacity: .8;
+            cursor: pointer;
+            transition: transform .2s;
+
+            &:hover {
+                transform: translateY(-2px);
+            }
+        }
+
+        &:hover {
+            background-color: rgba($color-income, .8);
         }
     }
 
@@ -341,6 +438,10 @@ body {
             overflow: auto;
         }
 
+        &:checked ~ .expenses__label {
+            color: $color-expense;
+        }
+
         &:checked ~ .expenses__label::after {
             transform: rotate(90deg);
         }
@@ -352,17 +453,18 @@ body {
 
         position: relative;
 
-        padding: 1.5rem 3rem 1.5rem 2rem;
-        background-color: $color-secondary;
+        padding: 1.5rem 3rem 1.5rem 3rem;
         box-shadow: 0 1px 5px rgba($color-black, .2);
+        transition: color .2s;
 
         font-size: 2rem;
+        cursor: pointer;
 
         &::after {
             content: '';
             background-image: url(../images/arrow-icon.svg);
-            width: 3rem;
-            height: 3rem;
+            width: 2.8rem;
+            height: 2.8rem;
             margin-left: auto;
             transform: rotate(0deg);
             transition: transform .4s cubic-bezier(0.645, 0.045, 0.355, 1); 
@@ -384,7 +486,8 @@ body {
         background-color: $color-expense;
         border-radius: 5px;
         color: $color-white;
-        padding: 1.5rem 3rem 1.5rem 2rem;
+        padding: 1.5rem 2rem;
+        transition: background-color .2s;
 
         display: flex;
         align-items: center;
@@ -393,22 +496,42 @@ body {
             margin-bottom: 1rem;
         }
 
-        &-type {
-            font-size: 2.4rem;
+        &-value {
+            width: 10rem;
 
-            margin-right: 3rem;
+            display: flex;
+            align-items: center;
+
+            .value-type {
+                font-size: 2.4rem;
+            }
+
+            .value-amount {
+                font-size: 2rem;
+                margin-left: 1rem;
+            }
         }
 
         &-title {
-            font-size: 1.8rem;
+            font-size: 1.6rem;
         }
 
         &-delete-icon {
-            width: 2.5rem;
-            height: 2.5rem;
+            width: 2.7rem;
+            height: 2.7rem;
             fill: $font-color;
             margin-left: auto;
-            opacity: .7;
+            opacity: .8;
+            cursor: pointer;
+            transition: transform .2s;
+
+            &:hover {
+                transform: translateY(-2px);
+            }
+        }
+
+        &:hover {
+            background-color: rgba($color-expense, .8);
         }
     }
 

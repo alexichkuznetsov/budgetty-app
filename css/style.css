@@ -129,9 +129,9 @@ body {
     transition: top .2s, left .2s, font-size .2s, color .2s; }
   .form__amount:focus ~ .form__amount-label,
   .form__amount:valid ~ .form__amount-label {
-    top: 5px;
+    top: 4px;
     left: 2px;
-    font-size: 1rem;
+    font-size: 1.2rem;
     color: rgba(17, 153, 142, 0.9); }
   .form__amount:focus {
     outline: none;
@@ -259,14 +259,15 @@ body {
   .incomes__list-item:not(:last-child) {
     margin-bottom: 1rem; }
   .incomes__list-item-value {
-    width: 10rem;
+    width: 8rem;
+    margin-right: 2rem;
     display: flex;
     align-items: center; }
     .incomes__list-item-value .value-type {
       font-size: 2.4rem; }
     .incomes__list-item-value .value-amount {
       font-size: 2rem;
-      margin-left: 1rem; }
+      margin-left: auto; }
   .incomes__list-item-title {
     font-size: 1.8rem; }
   .incomes__list-item-delete-icon {
@@ -317,7 +318,7 @@ body {
 
 .expenses__list {
   list-style: none;
-  padding: 2rem; }
+  padding: 2rem 3rem; }
 
 .expenses__list-item {
   background-color: #e74c3c;
@@ -330,16 +331,17 @@ body {
   .expenses__list-item:not(:last-child) {
     margin-bottom: 1rem; }
   .expenses__list-item-value {
-    width: 10rem;
+    width: 8rem;
+    margin-right: 2rem;
     display: flex;
     align-items: center; }
     .expenses__list-item-value .value-type {
       font-size: 2.4rem; }
     .expenses__list-item-value .value-amount {
       font-size: 2rem;
-      margin-left: 1rem; }
+      margin-left: auto; }
   .expenses__list-item-title {
-    font-size: 1.6rem; }
+    font-size: 1.8rem; }
   .expenses__list-item-delete-icon {
     width: 2.7rem;
     height: 2.7rem;
@@ -352,3 +354,27 @@ body {
       transform: translateY(-2px); }
   .expenses__list-item:hover {
     background-color: rgba(231, 76, 60, 0.8); }
+
+.appear-left {
+  animation: appearFromLeft;
+  animation-duration: .8s;
+  animation-timing-function: ease; }
+
+.dissappear-right {
+  animation: dissappearToRight .8s ease; }
+
+@keyframes appearFromLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-100%); }
+  100% {
+    opacity: 1;
+    transform: translateX(0); } }
+
+@keyframes dissappearToRight {
+  0% {
+    opacity: 1;
+    transform: translateX(0); }
+  100% {
+    opacity: 0;
+    transform: translateX(100%); } }

@@ -1,16 +1,41 @@
+const StorageController = (function() {
+    return {
+        getData: function() {
+            let data = localStorage.getItem('data');
+
+            if (data === null) {
+                data = {
+                    items: {
+                        inc: [],
+                        exp: []
+                    },
+                    totals: {
+                        inc: 0,
+                        exp: 0,
+                        percentages: 0,
+                        records: 0
+                    }
+                };
+
+                return data;
+            }
+
+            // If there is something in local storage
+            data = JSON.parse(data);
+            return data;
+        },
+
+        saveData: function() {
+            const data = BudgetController.getData();
+
+            localStorage.setItem('data', JSON.stringify(data));
+        }
+    }
+}());
+
 const BudgetController = (function() {
 
-    const data = {
-        items: {
-            inc: [],
-            exp: []
-        },
-        totals: {
-            inc: 0,
-            exp: 0,
-            percentages: 0
-        }
-    };
+    const data = StorageController.getData();
 
     function idGenerator(type) {
         const items = data.items[type];
@@ -38,6 +63,7 @@ const BudgetController = (function() {
             }
 
             data.items[item.type].push(newItem);
+            data.totals.records++;
 
             return newItem;
         },
@@ -48,6 +74,7 @@ const BudgetController = (function() {
             })
 
             data.items[type].splice(index, 1);
+            data.totals.records--;
         },
 
         countTotals: function(type) {
@@ -81,6 +108,10 @@ const BudgetController = (function() {
             return data.totals;
         },
 
+        getData: function() {
+            return data;
+        },
+
         logData: function() {
             console.log(data);
         }
@@ -102,7 +133,8 @@ const UIController = (function() {
         expensesCheckbox: 'checkbox-expenses',
         totalIncome: 'total-income',
         totalRatio: 'total-ratio',
-        totalExpense: 'total-expense'
+        totalExpense: 'total-expense',
+        headerCount: 'main-header__number'
     }
 
     return {
@@ -192,6 +224,13 @@ const UIController = (function() {
             }
         },
 
+        updateRecordsCount: function() {
+            const el = document.querySelector(`.${UISelectors.headerCount}`);
+            const totals = BudgetController.getTotals();
+
+            el.textContent = totals.records;
+        },
+
         deleteItem: function(el) {
             el.classList.add('dissappear-right');
             
@@ -249,6 +288,9 @@ const App = (function() {
         UIController.toggleList(item.type);
         UIController.renderItem(item);
         UIController.displayTotals();
+        UIController.updateRecordsCount();
+
+        StorageController.saveData();
 
         e.preventDefault();
     }
@@ -264,8 +306,11 @@ const App = (function() {
             BudgetController.countPercentage();
 
             UIController.displayTotals();
+            UIController.updateRecordsCount();
 
             UIController.deleteItem(el);
+
+            StorageController.saveData();
         }
     }
 
@@ -286,7 +331,21 @@ const App = (function() {
             console.log('App initialized..');
 
             loadEventListeners();
+
+            const data = BudgetController.getData();
+
+            if (data.items.inc.length !== 0) {
+                data.items.inc.forEach(function(item) { UIController.renderItem(item) });
+                UIController.toggleList('inc');
+            }
+
+            if (data.items.exp.length !== 0) {
+                data.items.exp.forEach(function(item) { UIController.renderItem(item) });
+                UIController.toggleList('exp');
+            }
+
             UIController.displayTotals();
+            UIController.updateRecordsCount();
         }
     }
 
